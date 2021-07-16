@@ -141,37 +141,41 @@ mais comumente consumidos pelo formato e-commerce. Repetições das categorias d
 ]
 
 ---
+
 # Qual o objetivo da análise de dados?
 
-## - oportunidades e possibilidades de desenvolvimento de novas estratégias
-## - VALOR
+.pull-left[
+- oportunidades e possibilidades de desenvolvimento de novas estratégias
+- VALOR
+]
 
+.pull-right[
+```{r echo=FALSE, out.width="100%"}
+knitr::include_graphics("img/ba1.png")
+```
+]
 
 ---
 
 ## Métodos
 
 .pull-left[
-Análise Descritiva: acompanhamento constante do status da empesa;
-Preditiva: previsões sobre como algo vai se comportar;
-Prescritiva: definição de estratégias a serem seguidas;
-Diagnóstica: entender como determinado fenômeno se desenvolveu.
+- Análise Descritiva: acompanhamento constante do status da empresa;   
+- Preditiva: previsões sobre como algo vai se comportar;   
+- Prescritiva: definição de estratégias a serem seguidas;   
+- Diagnóstica: entender como determinado fenômeno se desenvolveu.   
 ]
 
 .pull-right[
 ```{r echo=FALSE, out.width="100%"}
-knitr::include_graphics("img/ba.png")
+knitr::include_graphics("img/ba2.png")
 ```
 
 ]
----
-
-Indicadores
-Fonte de dados
 
 
 ---
-Business Analytics, ou análise de negócios, é o processo de avaliar e analisar todos os dados que a sua empresa dispõe e utilizá-los para tomar decisões data-driven. Esse conceito vai muito além de apenas olhar para os números e ver o que aconteceu.
+**Business Analytics**, ou análise de negócios, é o processo de avaliar e analisar todos os dados que a sua empresa dispõe e utilizá-los para tomar decisões data-driven. Esse conceito vai muito além de apenas olhar para os números e ver o que aconteceu.
 
 As principais características do Business Analytics são velocidade, otimização e entrega de resultados práticos. É a partir da sua aplicação que surgem relatórios, noções qualitativas e quantitativas, além de vários outros elementos que promovem uma exploração mais aprofundada do tema em questão.
 
