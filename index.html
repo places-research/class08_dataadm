@@ -1,0 +1,1176 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Manipulação de dados - dplyr</title>
+    <meta charset="utf-8" />
+    <meta name="author" content=" Renata Oliveira" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/font-awesome/css/all.css" rel="stylesheet" />
+    <link href="libs/font-awesome/css/v4-shims.css" rel="stylesheet" />
+    <link href="libs/panelset/panelset.css" rel="stylesheet" />
+    <script src="libs/panelset/panelset.js"></script>
+    <link href="libs/tile-view/tile-view.css" rel="stylesheet" />
+    <script src="libs/tile-view/tile-view.js"></script>
+    <script type="application/json" id="xaringanExtra-editable-docid">{"id":"x299a1bc668a4e56928a0b01460939da","expires":1}</script>
+    <script src="libs/himalaya/himalaya.js"></script>
+    <script src="libs/js-cookie/js.cookie.js"></script>
+    <link href="libs/editable/editable.css" rel="stylesheet" />
+    <script src="libs/editable/editable.js"></script>
+    <script src="libs/clipboard/clipboard.min.js"></script>
+    <link href="libs/xaringanExtra-clipboard/xaringanExtra-clipboard.css" rel="stylesheet" />
+    <script src="libs/xaringanExtra-clipboard/xaringanExtra-clipboard.js"></script>
+    <script>window.xaringanExtraClipboard(null, {"button":"<i class=\"fa fa-clipboard\"><\/i>","success":"<i class=\"fa fa-check\" style=\"color: #90BE6D\"><\/i>","error":"<i class=\"fa fa-times-circle\" style=\"color: #F94144\"><\/i>"})</script>
+    <script src="libs/xaringanExtra_fit-screen/fit-screen.js"></script>
+    <link href="libs/xaringanExtra-extra-styles/xaringanExtra-extra-styles.css" rel="stylesheet" />
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+    <link rel="stylesheet" href="slides.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Manipulação de dados - dplyr
+## Encontros Síncronos 07 e 08
+### <br></br>Renata Oliveira
+### 16/07/21 e 23/07/2021
+
+---
+
+
+
+
+
+layout: true
+  
+&lt;div class="my-footer"&gt;
+&lt;span&gt;
+&lt;a href="https://retaoliveira.github.io/places" target="_blank"&gt;https://retaoliveira.github.io/places&lt;/a&gt;
+&lt;/span&gt;
+&lt;/div&gt; 
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class: middle, inverse
+
+## - Cuidado com o YAML
+## - Como criar projetos para facilitar armazenamento de dados + imagens + Rmd + relatórios.
+
+---
+
+## Grupos e projetos
+
+.small[
+**Membros:** Dani, Diego, Ita, João, Victor   
+**Tema:** Grupo Cripto Moeda   
+**Objetivo:** Realizar uma análise dos valores históricos e tendências da Criptomoeda Bitcoin   
+**Dados:** https://br.investing.com/crypto/bitcoin/btc-brl-historical-data 
+
+**Membros:** Liza, Maria Clara P., Maria Clara V. e Rodolfo   
+**Tema:** Análise de dados dos estilos musicais mais tocados durante o período de pandemia   
+**Objetivo:** analisar o estilo musical mais tocado durante a pandemia do COVID-19 na plataforma Spotify  
+**Dados:** dois períodos anuais: maio/2019 a maio/2020 e maio/2020 a maio/2021
+
+**Membros:** Gustavo Correa   
+**Tema:** BitCoin   
+**Objetivo:** Vale a pena investir em BitCoin?   
+**Dados:** Corretora Binance - Dados históricos, Gráfico de candlestick, Cenários.
+]
+
+---
+
+## Grupos e projetos
+
+.small[
+**Membros:** Enilda, Gustavo Henrique, Luís Henrique, Rayane e Wendel   
+**Tema:** Análise de demonstrações financeiras da empresa Azul S.A   
+**Objetivo:** realizar a análise dos indicadores de rentabilidade e endividamento da empresa aérea Azul nos últimos 5 anos, por meio de suas demonstrações financeiras visando identificar os impactos advindos da pandemia em sua estrutura de capital   
+**Dados:** Rentabilidade: Lucro liquido/Patrimonio liquido / Endividamento: Passivo circulante/Ativo circulante 
+
+**Membros:** Bruna Ester Azevedo, Jonatas Silva, Isabela Costa, Luisa Aguiar   
+**Tema:** E-commerce no Brasil   
+**Objetivo:** identificar os padrões da amostra de E-commerce brasileiro em questão.    
+**Dados:** Pretendemos analisar esta métrica especificamente em produtos/itens - a fim de identificar quais tipos de produto são 
+mais comumente consumidos pelo formato e-commerce. Repetições das categorias de produtos e compará-las numericamente / localização; do mesmo conjunto de dados
+
+**Membros:** Isabella Oliveira Pereira, Jefferson Alves, Natália Araíjo   
+**Tema:** Estatísticas do CoronaVirus      
+**Objetivo:** Relação entre o número de vacinados e o número de óbitos por estado   
+**Dados:** Agregação dos dados
+]
+
+---
+# Qual o objetivo da análise de dados?
+
+## - oportunidades e possibilidades de desenvolvimento de novas estratégias
+## - VALOR
+
+
+---
+
+Análise Descritiva: acompanhamento constante do status da empesa;
+Preditiva: previsões sobre como algo vai se comportar;
+Prescritiva: definição de estratégias a serem seguidas;
+Diagnóstica: entender como determinado fenômeno se desenvolveu.
+
+---
+
+Indicadores
+Fonte de dados
+
+
+---
+Business Analytics, ou análise de negócios, é o processo de avaliar e analisar todos os dados que a sua empresa dispõe e utilizá-los para tomar decisões data-driven. Esse conceito vai muito além de apenas olhar para os números e ver o que aconteceu.
+
+As principais características do Business Analytics são velocidade, otimização e entrega de resultados práticos. É a partir da sua aplicação que surgem relatórios, noções qualitativas e quantitativas, além de vários outros elementos que promovem uma exploração mais aprofundada do tema em questão.
+
+---
+# Para que o BA tem sido utilizado pelas empresas?
+
+- avaliação da concorrência;   
+- avaliação do histórico da empresa;   
+- confiabilidade das informações;   
+- agilidade nos planejamentos;   
+- auxílio na elaboração de planejamentos estratégicos;   
+- melhoria na organização de processos;   
+- redução de erros e falhas;   
+- redução de duplicação de tarefas;   
+- redução de custos;   
+- elaboração de estratégias de marketing digital mais personalizadas;   
+- melhores perspectivas de crescimento, com base nas informações levantadas.   
+
+---
+
+class: center, middle
+
+## Retrospecto
+
+---
+
+## Modelo conceitual da análise de dados
+
+![Modelo de Data Science](https://retaoliveira.github.io/relements/figures/dataR.png)
+
+---
+
+## Tipos de dados
+
+- Os tipos de dados mais comuns são `character`, `numeric`, `factor`e `logical`.
+
+## Tipos de classes de objetos no R
+
+- As classes de organização dos dados mais comuns são `vector`, `list`, `matrix` e `dataframe`.
+
+
+---
+
+## RMarkdown
+
+&lt;img src="img/render.png" width="100%" style="display: block; margin: auto;" /&gt;
+.footnote[
+Alison Hill [Teaching in Production](https://rstudio-education.github.io/teaching-in-production/slides/index.html#1)
+]
+
+---
+
+## ggplot2
+
+- ggplot() é a função principal no ggplot2
+- As parcelas são construídas em camadas
+- A estrutura do código para as parcelas pode ser resumida como
+
+
+```r
+ggplot(data = [dataset], 
+       mapping = aes(x = [x-variable], y = [y-variable])) +
+   geom_xxx() +
+   other options
+```
+
+
+---
+
+## Tidy data
+
+&gt;As famílias infelizes são todas iguais; cada família infeliz é infeliz à sua própria maneira. 
+&gt;
+&gt;Leo Tolstoy
+
+---
+
+.pull-left[
+**Características dos dados tidy:**
+
+- Cada variável forma uma coluna.
+- Cada observação forma uma linha.
+- Livre de linhas/colunas duplicadas.
+- Livre de erros de ortografia
+- Relevante (por exemplo, livre de caracteres especiais)
+- O tipo de dados apropriado para análise
+- Livre de outliers (ou só contém outliers que tenham sido identificados/entendidos), e
+]
+--
+.pull-right[
+**Características dos dados untidy:**
+
+!@#$%^&amp;*()
+]
+
+---
+
+## 
+
+.question[
+O que faz com que estes dados não estejam arrumados?
+]
+
+&lt;img src="img/hyperwar-airplanes-on-hand.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+.footnote[
+Source: [Army Air Forces Statistical Digest, WW II](https://www.ibiblio.org/hyperwar/AAF/StatDigest/aafsd-3.html)
+]
+
+---
+
+.question[
+O que faz com que estes dados não estejam arrumados?
+]
+
+&lt;br&gt;
+
+&lt;img src="img/hiv-est-prevalence-15-49.png" width="70%" style="display: block; margin: auto;" /&gt;
+
+.footnote[
+Source: [Gapminder, Estimated HIV prevalence among 15-49 year olds](https://www.gapminder.org/data)
+]
+
+---
+
+.question[
+O que faz com que estes dados não estejam arrumados?
+]
+
+&lt;br&gt;
+
+&lt;img src="img/us-general-economic-characteristic-acs-2017.png" width="85%" style="display: block; margin: auto;" /&gt;
+
+.footnote[
+Source: [US Census Fact Finder, General Economic Characteristics, ACS 2017](https://factfinder.census.gov/faces/tableservices/jsf/pages/productview.xhtml?pid=ACS_17_5YR_DP03&amp;src=pt)
+]
+
+---
+
+## Exibição vs. resumo de dados
+
+.panelset[
+
+.panel[.panel-name[Saída]
+
+.pull-left[
+
+```
+## # A tibble: 87 x 3
+##   name           height  mass
+##   &lt;chr&gt;           &lt;int&gt; &lt;dbl&gt;
+## 1 Luke Skywalker    172    77
+## 2 C-3PO             167    75
+## 3 R2-D2              96    32
+## 4 Darth Vader       202   136
+## 5 Leia Organa       150    49
+## 6 Owen Lars         178   120
+## # ... with 81 more rows
+```
+]
+.pull-right[
+
+```
+## # A tibble: 3 x 2
+##   gender    avg_ht
+##   &lt;chr&gt;      &lt;dbl&gt;
+## 1 feminine    165.
+## 2 masculine   177.
+## 3 &lt;NA&gt;        181.
+```
+]
+
+]
+
+.panel[.panel-name[Código]
+
+.pull-left[
+
+```r
+starwars %&gt;%
+  select(name, height, mass)
+```
+]
+.pull-right[
+
+```r
+starwars %&gt;%
+  group_by(gender) %&gt;%
+  summarize(
+    avg_ht = mean(height, na.rm = TRUE)
+    )
+```
+]
+
+]
+
+]
+
+
+---
+
+class: middle
+
+# Gramática do data wrangling
+
+---
+
+## Gramática do data wrangling
+
+Com base nos conceitos de funções como verbos que permitem a manipulação de dataframes
+
+.pull-left[
+&lt;img src="img/dplyr-part-of-tidyverse.png" width="70%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+.small[
+- `select`: seleção de colunas pelo nome
+- `arrange`: reorganização das colunas
+- `slice`: seleção de linhas pelo index(es)
+- `filter`: seleção de linhas segundo algum critério
+- `distinct`: aplica um filtro para que não haja colunas duplicadas
+- `mutate`: adição de novas variáveis
+- `summarise`: redução de variáveis a valores
+- `group_by`: operações em agrupamentos
+- ... (many more)
+]
+]
+
+---
+
+## Regras das funções **dplyr**
+
+- O primeiro argumento é **sempre** um dataframe
+- Os argumentos subseqüentes dizem o que fazer com esse dataframe
+- A saída é sempre um dataframe
+- Não modifica os dados originais
+
+---
+
+## Dados: Reservas de hotéis
+
+- Dados de dois hotéis: um resort e um hotel urbano
+- Observações: Cada linha representa uma reserva de hotel
+- Objetivo para a coleta de dados originais: Desenvolvimento de modelos de previsão para classificar a probabilidade de uma reserva de hotel ser cancelada ([Antonia et al., 2019](https://www.sciencedirect.com/science/article/pii/S2352340918315191#bib5))
+
+[Dados](https://cefetmgbr-my.sharepoint.com/:x:/g/personal/renataoliveira_cefetmg_br/EUrBw09_G6BAhuASz0wyAEwBCl_pm5aHc5Ok8m4oAilz8w?e=qieY4H)
+
+
+```r
+library(readr)
+hotels &lt;- read_csv("./data/hotels.csv")
+```
+
+.footnote[
+Source: [TidyTuesday](https://github.com/rfordatascience/tidytuesday/blob/master/data/2020/2020-02-11/readme.md)
+]
+
+---
+
+## Primeiro olhar: Variáveis
+
+.small[
+
+```r
+names(hotels)
+```
+
+```
+##  [1] "hotel"                         
+##  [2] "is_canceled"                   
+##  [3] "lead_time"                     
+##  [4] "arrival_date_year"             
+##  [5] "arrival_date_month"            
+##  [6] "arrival_date_week_number"      
+##  [7] "arrival_date_day_of_month"     
+##  [8] "stays_in_weekend_nights"       
+##  [9] "stays_in_week_nights"          
+## [10] "adults"                        
+## [11] "children"                      
+## [12] "babies"                        
+## [13] "meal"                          
+## [14] "country"                       
+## [15] "market_segment"                
+## [16] "distribution_channel"          
+## [17] "is_repeated_guest"             
+## [18] "previous_cancellations"        
+...
+```
+]
+
+---
+
+## Segundo olhar: Visão geral
+
+.small[
+
+```r
+glimpse(hotels)
+```
+
+```
+## Rows: 119,390
+## Columns: 32
+## $ hotel                          &lt;chr&gt; "Resort Hotel", "Resort ~
+## $ is_canceled                    &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, ~
+## $ lead_time                      &lt;dbl&gt; 342, 737, 7, 13, 14, 14,~
+## $ arrival_date_year              &lt;dbl&gt; 2015, 2015, 2015, 2015, ~
+## $ arrival_date_month             &lt;chr&gt; "July", "July", "July", ~
+## $ arrival_date_week_number       &lt;dbl&gt; 27, 27, 27, 27, 27, 27, ~
+## $ arrival_date_day_of_month      &lt;dbl&gt; 1, 1, 1, 1, 1, 1, 1, 1, ~
+## $ stays_in_weekend_nights        &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, ~
+## $ stays_in_week_nights           &lt;dbl&gt; 0, 0, 1, 1, 2, 2, 2, 2, ~
+## $ adults                         &lt;dbl&gt; 2, 2, 1, 1, 2, 2, 2, 2, ~
+## $ children                       &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, ~
+## $ babies                         &lt;dbl&gt; 0, 0, 0, 0, 0, 0, 0, 0, ~
+## $ meal                           &lt;chr&gt; "BB", "BB", "BB", "BB", ~
+## $ country                        &lt;chr&gt; "PRT", "PRT", "GBR", "GB~
+## $ market_segment                 &lt;chr&gt; "Direct", "Direct", "Dir~
+## $ distribution_channel           &lt;chr&gt; "Direct", "Direct", "Dir~
+...
+```
+]
+
+---
+
+## Selecione uma única coluna
+
+Ver apenas `lead_time` (número de dias entre a reserva e a data de chegada):
+
+
+```r
+select(hotels, lead_time)
+```
+
+```
+## # A tibble: 119,390 x 1
+##   lead_time
+##       &lt;dbl&gt;
+## 1       342
+## 2       737
+## 3         7
+## 4        13
+## 5        14
+## 6        14
+## # ... with 119,384 more rows
+```
+
+---
+
+## Selecione uma única coluna
+
+.pull-left[
+
+```r
+*select(
+  hotels, 
+  lead_time
+  )
+```
+]
+.pull-right[
+- Comece com a função (um verbo):  `select()`
+]
+
+---
+
+## Selecione uma única coluna
+
+.pull-left[
+
+```r
+select( 
+* hotels,
+  lead_time
+  )
+```
+]
+.pull-right[
+- Comece com a função (um verbo): `select()`
+- Primeiro argumento: dataframe com o qual estamos trabalhando, `hotels`.
+]
+
+---
+
+## Select a single column
+
+.pull-left[
+
+```r
+select( 
+  hotels, 
+* lead_time
+  )
+```
+]
+.pull-right[
+.pull-right[
+- Comece com a função (um verbo): `select()`
+- Primeiro argumento: dataframe com o qual estamos trabalhando, `hotels`.
+- Segundo argumento: variável que queremos acessar, `lead_time`
+]
+
+---
+
+## Select a single column
+
+.pull-left[
+
+```r
+select( 
+  hotels, 
+  lead_time
+  )
+```
+
+```
+## # A tibble: 119,390 x 1
+##   lead_time
+##       &lt;dbl&gt;
+## 1       342
+## 2       737
+## 3         7
+## 4        13
+## 5        14
+## 6        14
+## # ... with 119,384 more rows
+```
+]
+.pull-right[
+- Comece com a função (um verbo): `select()`
+- Primeiro argumento: dataframe com o qual estamos trabalhando, `hotels`.
+- Segundo argumento: variável que queremos acessar, `lead_time`
+- Resultado: data frame com 119390 linhas e 1 coluna
+]
+
+---
+
+.tip[
+dplyr funções precisam de um data frame como entrada e entregam um data frame.
+]
+
+
+```r
+select(hotels, lead_time)
+```
+
+```
+## # A tibble: 119,390 x 1
+##   lead_time
+##       &lt;dbl&gt;
+## 1       342
+## 2       737
+## 3         7
+## 4        13
+## 5        14
+## 6        14
+## # ... with 119,384 more rows
+```
+
+---
+
+## Selecione várias colunas
+
+
+Veja apenas o tipo de `hotel` e o `lead_time`:
+
+--
+
+.pull-left[
+
+```r
+select(hotels, hotel, lead_time)
+```
+
+```
+## # A tibble: 119,390 x 2
+##   hotel        lead_time
+##   &lt;chr&gt;            &lt;dbl&gt;
+## 1 Resort Hotel       342
+## 2 Resort Hotel       737
+## 3 Resort Hotel         7
+## 4 Resort Hotel        13
+## 5 Resort Hotel        14
+## 6 Resort Hotel        14
+## # ... with 119,384 more rows
+```
+]
+--
+.pull-right[
+.question[
+E se quiséssemos selecionar estas colunas, e depois organizar os dados em ordem decrescente conforme data?
+]
+]
+
+---
+
+## Data wrangling, passo-a-passo
+
+.pull-left[
+Selecione:
+
+```r
+hotels %&gt;%
+  select(hotel, lead_time)
+```
+
+```
+## # A tibble: 119,390 x 2
+##   hotel        lead_time
+##   &lt;chr&gt;            &lt;dbl&gt;
+## 1 Resort Hotel       342
+## 2 Resort Hotel       737
+## 3 Resort Hotel         7
+## 4 Resort Hotel        13
+## 5 Resort Hotel        14
+## 6 Resort Hotel        14
+## # ... with 119,384 more rows
+```
+]
+
+--
+.pull-right[
+Selecione, depois organize:
+
+```r
+hotels %&gt;%
+  select(hotel, lead_time) %&gt;%
+  arrange(desc(lead_time))
+```
+
+```
+## # A tibble: 119,390 x 2
+##   hotel        lead_time
+##   &lt;chr&gt;            &lt;dbl&gt;
+## 1 Resort Hotel       737
+## 2 Resort Hotel       709
+## 3 City Hotel         629
+## 4 City Hotel         629
+## 5 City Hotel         629
+## 6 City Hotel         629
+## # ... with 119,384 more rows
+```
+]
+
+---
+
+class: middle
+
+# Pipes
+
+---
+
+## O que é um pipe?
+
+Na programação, `pipe` é uma técnica para passar informações de um processo para outro.
+
+--
+
+.pull-left[
+- Comece com o dataframe `hotels`, e utilize a função `select()`,
+]
+.pull-right[
+.small[
+
+```r
+*hotels %&gt;%
+  select(hotel, lead_time) %&gt;%
+  arrange(desc(lead_time))
+```
+
+```
+## # A tibble: 119,390 x 2
+##   hotel        lead_time
+##   &lt;chr&gt;            &lt;dbl&gt;
+## 1 Resort Hotel       737
+## 2 Resort Hotel       709
+## 3 City Hotel         629
+## 4 City Hotel         629
+## 5 City Hotel         629
+## 6 City Hotel         629
+## # ... with 119,384 more rows
+```
+]
+]
+
+---
+
+## O que é um pipe?
+
+Na programação, `pipe` é uma técnica para passar informações de um processo para outro.
+
+.pull-left[
+- Comece com o dataframe `hotels`, e utilize a função `select()`,
+- e então, selecione `hotel` and `lead_time`,
+]
+.pull-right[
+.small[
+
+```r
+hotels %&gt;%
+* select(hotel, lead_time) %&gt;%
+  arrange(desc(lead_time))
+```
+
+```
+## # A tibble: 119,390 x 2
+##   hotel        lead_time
+##   &lt;chr&gt;            &lt;dbl&gt;
+## 1 Resort Hotel       737
+## 2 Resort Hotel       709
+## 3 City Hotel         629
+## 4 City Hotel         629
+## 5 City Hotel         629
+## 6 City Hotel         629
+## # ... with 119,384 more rows
+```
+]
+]
+
+---
+
+## O que é um pipe?
+
+Na programação, `pipe` é uma técnica para passar informações de um processo para outro.
+
+.pull-left[
+- Comece com o dataframe `hotels`, e utilize a função `select()`,
+- e então, selecione `hotel` and `lead_time`,
+- e então, organize de maneira decrescente conforme o `lead_time`.
+]
+.pull-right[
+.small[
+
+```r
+hotels %&gt;%
+  select(hotel, lead_time) %&gt;% 
+* arrange(desc(lead_time))
+```
+
+```
+## # A tibble: 119,390 x 2
+##   hotel        lead_time
+##   &lt;chr&gt;            &lt;dbl&gt;
+## 1 Resort Hotel       737
+## 2 Resort Hotel       709
+## 3 City Hotel         629
+## 4 City Hotel         629
+## 5 City Hotel         629
+## 6 City Hotel         629
+## # ... with 119,384 more rows
+```
+]
+]
+
+---
+
+## Além
+
+O pipe é implementado no pacote **magrittr**, embora não precisemos carregar este pacote explicitamente, pois **tidyverse** faz isto por nós.
+
+--
+
+.question[
+Algum palpite sobre o porquê do pacote ser chamado de magrittr?
+]
+
+--
+
+.pull-left[
+&lt;img src="img/magritte.jpg" width="90%" style="display: block; margin: auto;" /&gt;
+]
+.pull-right[
+&lt;img src="img/magrittr.jpg" width="100%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+## Como funciona o pipe?
+
+- Você pode pensar na seguinte seqüência de ações - encontrar chaves, destravar o carro, ligar o carro, dirigir para o trabalho, estacionar.
+
+--
+- Expresso como um conjunto de funções aninhadas no pseudo-código R, isto pareceria:
+
+```r
+park(drive(start_car(find("keys")), to = "work"))
+```
+
+--
+- Escrevê-lo usando pipes dá-lhe uma estrutura mais natural (e mais fácil de ler):
+
+```r
+find("keys") %&gt;%
+  start_car() %&gt;%
+  drive(to = "work") %&gt;%
+  park()
+```
+
+---
+
+## Uma nota sobre pipes e estratificação
+
+- utilizado principalmente em **dplyr** pipelines, *canalizamos a saída da linha de código anterior como a primeira entrada da próxima linha de código*.
+
+--
+- O `+` utilizado em **ggplot2** é utilizado para "estratificação", *criamos a parcela em camadas, separadas por `+`*
+
+---
+
+## dplyr
+
+.midi[
+❌
+
+
+```r
+hotels +
+  select(hotel, lead_time)
+```
+
+```
+## Error in select(hotel, lead_time): objeto 'hotel' não encontrado
+```
+
+✅
+
+
+```r
+hotels %&gt;%
+  select(hotel, lead_time)
+```
+
+.midi[
+
+```
+## # A tibble: 119,390 x 2
+##   hotel        lead_time
+##   &lt;chr&gt;            &lt;dbl&gt;
+## 1 Resort Hotel       342
+## 2 Resort Hotel       737
+## 3 Resort Hotel         7
+...
+```
+]
+]
+
+---
+
+## ggplot2
+
+.midi[
+❌
+
+
+```r
+ggplot(hotels, aes(x = hotel, fill = deposit_type)) %&gt;%
+  geom_bar()
+```
+
+```
+## Error: `mapping` must be created by `aes()`
+## Did you use %&gt;% instead of +?
+```
+
+✅
+
+
+```r
+ggplot(hotels, aes(x = hotel, fill = deposit_type)) +
+  geom_bar()
+```
+
+&lt;img src="index_files/figure-html/unnamed-chunk-30-1.png" width="25%" style="display: block; margin: auto;" /&gt;
+]
+
+---
+
+## Gramática do data wrangling
+
+
+- `select`: seleção de colunas pelo nome
+- `arrange`: reorganização das colunas
+- `slice`: seleção de linhas pelo index(es)
+- `filter`: seleção de linhas segundo algum critério
+- `distinct`: aplica um filtro para que não haja colunas duplicadas
+- `mutate`: adição de novas variáveis
+- `summarise`: redução de variáveis a valores
+- `group_by`: operações em agrupamentos
+- ... (many more)
+
+---
+
+## Data wrangling, passo-a-passo
+
+.pull-left[
+Selecione:
+
+```r
+hotels %&gt;%
+  select(hotel, lead_time)
+```
+]
+
+--
+.pull-right[
+Selecione, depois organize:
+
+```r
+hotels %&gt;%
+  select(hotel, lead_time) %&gt;%
+  arrange(desc(lead_time))
+```
+]
+
+---
+
+## O que é um pipe?
+
+Na programação, `pipe` é uma técnica para passar informações de um processo para outro.
+
+
+
+```r
+*hotels %&gt;%
+  select(hotel, lead_time) %&gt;%
+  arrange(desc(lead_time))
+```
+
+---
+
+### Operadores aritméticos R
+
+Operador | Descrição
+---------|-----------
+x + y |	Adição de x com y
+x - y	| Subtração de y em x
+x * y	| Multiplicação de x e y
+x / y	| Divisão de x por y
+x^y ou x**y	| x elevado a y-ésima potência
+x%%y	| Resto da divisão de x por y (módulo)
+x%/%y	| Parte inteira da divisão de x por y
+
+---
+
+### Operadores de comparação no R
+
+Operador	| Significado
+----------|------------
+==	| igual a
+!=	| diferente de
+\&gt;	| maior que
+&lt;	| menor que
+\&gt;=	| maior ou igual a
+&lt;=	| menor ou igual a
+
+&gt; Os operadores de comparação sempre retornam um valor lógico TRUE ou FALSE.
+
+---
+
+
+### Operadores lógicos no R
+
+.small[
+Operador|Descrição|Explicação
+--------|---------|----------
+&amp; |	AND lógico|	Versão vetorizada. Compara dois elementos do tipo vetor e retorna um vetor de TRUEs e FALSEs
+&amp;#124;| OR lógico| Versão vetorizada. Compara dois elementos do tipo vetor e retorna um vetor de TRUEs e FALSEs
+!	|NOT lógico|Negação lógica. Retorna um valor lógico único ou um vetor de TRUE / FALSE.
+]
+
+&gt; Também conhecidos como operadores booleanos, permitem trabalhar com múltiplas condições relacionais na mesma expressão, e retornam valores lógicos verdadeiro ou falso.
+
+---
+
+### Algumas funções estatísticas para sumarização de dados
+
+.pull-left[
+Funções | Descrição
+--------|----------
+`min()`| mínimo  
+`max()`| máximo  
+`range()`| amplitude   
+`mean()`| média   
+`sum()`| soma
+`median()`| mediana
+`sd()`| desvio-padrão
+`IQR()`| intervalo interquantil
+]
+
+.pull-right[
+Funções | Descrição
+--------|----------
+`quantile()`| quartis
+`var()`| variância
+`cor()`| correlação
+`summary()`| métricas de sumarização
+`rowMeans()`| média das linhas
+`colMeans()`| média das colunas
+`rowSums()`| soma das linhas
+`colSums()`| soma das colunas
+]
+---
+
+### Tratamento de dados omissos
+O R permite que sejam armazenados, em vetores e data.frames, o valor `NA` (Not Available), que representa dados que ainda não são conhecidos. 
+
+&gt;`x == NA` trará sempre um resultado FALSE, mesmo que `x` não seja conhecido.
+
+
+---
+
+class: middle, center
+#DÚVIDAS?
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"ratio": "16:9",
+"highlightLines": true,
+"highlightStyle": "solarized-light",
+"countIncrementalSlides": false,
+"slideNumberFormat": "<div class=\"progress-bar-container\">\n  <div class=\"progress-bar\" style=\"width: calc(%current% / %total% * 100%);\">\n  </div>\n</div>\n"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
