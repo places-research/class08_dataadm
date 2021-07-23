@@ -487,6 +487,7 @@ select(
   )
 ```
 ]
+
 .pull-right[
 - Comece com a função (um verbo): `select()`
 - Primeiro argumento: dataframe com o qual estamos trabalhando, `hotels`.
@@ -494,7 +495,7 @@ select(
 
 ---
 
-## Select a single column
+## Selecione uma única coluna
 
 .pull-left[
 ```{r eval=FALSE}
@@ -504,7 +505,7 @@ select(
   )
 ```
 ]
-.pull-right[
+
 .pull-right[
 - Comece com a função (um verbo): `select()`
 - Primeiro argumento: dataframe com o qual estamos trabalhando, `hotels`.
@@ -513,7 +514,7 @@ select(
 
 ---
 
-## Select a single column
+## Selecione uma única coluna
 
 .pull-left[
 ```{r}
@@ -523,6 +524,7 @@ select(
   )
 ```
 ]
+
 .pull-right[
 - Comece com a função (um verbo): `select()`
 - Primeiro argumento: dataframe com o qual estamos trabalhando, `hotels`.
